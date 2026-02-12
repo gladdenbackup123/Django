@@ -5,21 +5,18 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Age</th>
         <th>Course</th>
         <th>Marks</th>
     </tr>
 
+    {% for student in students %}
     <tr>
-        <td>1</td>
-        <td>Rahul</td>
-        <td>Python</td>
-        <td>85</td>
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.course}}</td>
+        <td>{{student.marks}}</td>
     </tr>
-
-    <tr>
-        <td>2</td>
-        <td>Anita</td>
-        <td>Django</td>
-        <td>92</td>
-    </tr>
+    {% endfor %}
 </table>

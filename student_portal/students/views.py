@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Student
 
 # Create your views here.
 # def home(request):
@@ -13,4 +14,8 @@ def home(request):
     return render(request,'home.html',data)
 
 def students_page(request):
-    return render(request,'students.html')
+    # students = Student.objects.all()
+    # students = Student.objects.order_by('marks')
+    # students = Student.objects.order_by('marks')
+    students = Student.objects.filter(marks__gt = 80)
+    return render(request,'students.html',{'students':students})
