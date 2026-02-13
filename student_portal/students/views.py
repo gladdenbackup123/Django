@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Student
 from .forms import StudentForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
 
 # Create your views here.
 # def home(request):
@@ -76,6 +78,19 @@ def edit_student(request,id):
         form = StudentForm(instance=student)
 
     return render(request,'edit_student.html',{'form':form})
+
+def login_user(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request,user)
+            return redirect('/students/')
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'login.html', {'form':form})
 
 # def edit_student(request,id):
 #     student = Student.objects.get(id=id)
