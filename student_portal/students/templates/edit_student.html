@@ -5,10 +5,11 @@
 
 <form method="post" class="form">
     {% csrf_token %}
-    <input type="text" name="name" placeholder="Student Name" value="{{student.name}}" required>
+    {{ form.as_p }}
+    <!-- <input type="text" name="name" placeholder="Student Name" value="{{student.name}}" required>
     <input type="number" name="age" placeholder="Age" value="{{student.age}}" required>
     <input type="text" name="course" placeholder="Course" value="{{student.course}}" required>
-    <input type="number" name="marks" placeholder="Marks" value="{{student.marks}}" required>
+    <input type="number" name="marks" placeholder="Marks" value="{{student.marks}}" required> -->
 
     <button class="btn">Submit</button>
 </form>

@@ -63,6 +63,17 @@ body{
     margin:10px 0;
 }
 
+.error{
+    color:#b91c1c; /* red-700 */
+    background:#fee2e2; /* red-100 */
+    padding:12px 16px;
+    border:1px solid #fca5a5; /* red-300 */
+    border-radius:6px;
+    display:block;
+    margin:15px 0;
+    font-weight:500;
+}
+
 .footer{
     text-align:center;
     background:#0f172a;

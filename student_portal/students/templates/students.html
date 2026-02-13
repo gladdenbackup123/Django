@@ -3,6 +3,15 @@
 {% block content %}
 <h1>Students List</h1>
 
+<form method="get" class="form">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by name"
+        value="{{query | default:''}}"
+    >
+    <button class="btn">Search</button>
+</form>
 <table class="table">
     <tr>
         <th>ID</th>
@@ -10,6 +19,7 @@
         <th>Age</th>
         <th>Course</th>
         <th>Marks</th>
+        <th>Actions</th>
     </tr>
 
     {% for student in students %}
@@ -19,6 +29,10 @@
         <td>{{student.age}}</td>
         <td>{{student.course}}</td>
         <td>{{student.marks}}</td>
+        <td>
+            <a class="btn" href="/edit/{{student.id}}">Edit</a>
+            <a class="btn" href="/delete/{{student.id}}" onclick="return confirm('Delete this student?');">Delete</a>
+        </td>
     </tr>
     {% endfor %}
 </table>
