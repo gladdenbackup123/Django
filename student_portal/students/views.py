@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,Passwo
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 # def home(request):
@@ -21,6 +22,11 @@ def home(request):
 @login_required
 def students_page(request):
     students = Student.objects.all()
+    
+    paginator = Paginator(students, 2) # Show 2 students per page
+    page_number = request.GET.get('page')
+    students = paginator.get_page(page_number)
+
     query = request.GET.get('search') 
 
     if query:

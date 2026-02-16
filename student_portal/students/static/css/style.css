@@ -81,3 +81,16 @@ body{
     padding:20px;
     margin-top:50px;
 }
+
+.pagination{
+    margin-top:20px;
+}
+
+.pagination a{
+    margin:0 5px;
+    padding:8px 12px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
