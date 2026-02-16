@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Student
 from .forms import StudentForm
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
@@ -113,6 +114,19 @@ def register_user(request):
         form = UserCreationForm()
     
     return render(request,'register.html',{'form':form})
+
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user,request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)
+            return redirect('/students/')
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    return render(request,'change_password.html',{'form':form})
 
 
 # def edit_student(request,id):

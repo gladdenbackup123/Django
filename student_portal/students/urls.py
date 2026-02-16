@@ -9,5 +9,6 @@ urlpatterns = [
     path('edit/<int:id>',views.edit_student),
     path('login/',views.login_user),
     path('logout/',views.logout_user),
-    path('register',views.register_user)
+    path('register',views.register_user),
+    path('change_password/',views.change_password)
 ]

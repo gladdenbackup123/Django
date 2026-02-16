@@ -17,6 +17,7 @@
                 <a href="/add">Add Student</a>
                 <a href="/logout">Logout</a>
                 {% if user.is_authenticated %}
+                    <a href="/change_password">Change Password</a>
                     <span class="welcome">Welcome, {{ user.username }}</span>
                 {% else %}
                     <a href="/login">Login</a>
