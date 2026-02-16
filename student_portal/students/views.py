@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Student
 from .forms import StudentForm
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # def home(request):
@@ -16,6 +17,7 @@ def home(request):
     }
     return render(request,'home.html',data)
 
+@login_required
 def students_page(request):
     students = Student.objects.all()
     query = request.GET.get('search') 
@@ -27,6 +29,7 @@ def students_page(request):
     # students = Student.objects.filter(marks__gt = 80)
     return render(request,'students.html',{'students':students,'query':query})
 
+@login_required
 def add_student(request):
     if request.method == "POST":
         form = StudentForm(request.POST)
@@ -61,11 +64,13 @@ def add_student(request):
 
 #     return render(request,'add_student.html')
 
+@login_required
 def delete_student(request,id):
     student = Student.objects.get(id=id)
     student.delete()
     return redirect('/students/')
 
+@login_required
 def edit_student(request,id):
     student = Student.objects.get(id=id)
 
@@ -91,6 +96,24 @@ def login_user(request):
         form = AuthenticationForm()
     
     return render(request, 'login.html', {'form':form})
+
+def logout_user(request):
+    logout(request)
+    return redirect('/login/')
+
+def register_user(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            return redirect('/students/')
+    else:
+        form = UserCreationForm()
+    
+    return render(request,'register.html',{'form':form})
+
 
 # def edit_student(request,id):
 #     student = Student.objects.get(id=id)

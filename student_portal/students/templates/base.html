@@ -15,6 +15,12 @@
                 <a href="/">Home</a>
                 <a href="/students">Students</a>
                 <a href="/add">Add Student</a>
+                <a href="/logout">Logout</a>
+                {% if user.is_authenticated %}
+                    <span class="welcome">Welcome, {{ user.username }}</span>
+                {% else %}
+                    <a href="/login">Login</a>
+                {% endif %}
             </nav>
         </header>
 
