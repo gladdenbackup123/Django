@@ -14,7 +14,11 @@
             <nav>
                 <a href="/">Home</a>
                 <a href="/students">Students</a>
+                
+                {% if user.is_staff %}
                 <a href="/add">Add Student</a>
+                {% endif %}
+
                 <a href="/logout">Logout</a>
                 {% if user.is_authenticated %}
                     <a href="/change_password">Change Password</a>

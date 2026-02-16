@@ -38,7 +38,10 @@ def students_page(request):
 
 @login_required
 def add_student(request):
-    if request.method == "POST":
+    if not request.user.is_staff:
+        return redirect('/students/')
+    
+    if request.method == "POST":        
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
@@ -73,12 +76,18 @@ def add_student(request):
 
 @login_required
 def delete_student(request,id):
+    if not request.user.is_staff:
+        return redirect('/students/')
+    
     student = Student.objects.get(id=id)
     student.delete()
     return redirect('/students/')
 
 @login_required
 def edit_student(request,id):
+    if not request.user.is_staff:
+        return redirect('/students/')
+    
     student = Student.objects.get(id=id)
 
     if request.method == "POST":

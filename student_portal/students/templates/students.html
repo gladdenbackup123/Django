@@ -19,7 +19,9 @@
         <th>Age</th>
         <th>Course</th>
         <th>Marks</th>
+        {% if user.is_staff %}
         <th>Actions</th>
+        {% endif %}
     </tr>
 
     {% for student in students %}
@@ -30,8 +32,10 @@
         <td>{{student.course}}</td>
         <td>{{student.marks}}</td>
         <td>
+            {% if user.is_staff %}
             <a class="btn" href="/edit/{{student.id}}">Edit</a>
             <a class="btn" href="/delete/{{student.id}}" onclick="return confirm('Delete this student?');">Delete</a>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}
@@ -50,4 +54,5 @@
         <a href="?page={{ students.paginator.num_pages }}">Last</a>
     {% endif %}
 
+</div>
 {% endblock %}
