@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Dog Image Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .image-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .secondary-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .secondary-button:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            button {
+                padding: 10px 25px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐕 Dog Image Generator</h1>
+        <p class="subtitle">Discover a random adorable dog image</p>
+        
+        <div class="image-container">
+            <img src="{{ url }}" alt="Random Dog Image" loading="lazy">
+        </div>
+
+        <div class="button-container">
+            <button onclick="location.reload()">🔄 Get Another Dog</button>
+            <button class="secondary-button" onclick="downloadImage()">⬇️ Download</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadImage() {
+            const imageUrl = '{{ url }}';
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'dog-image.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+
