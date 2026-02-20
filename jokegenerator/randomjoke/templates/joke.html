@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Random Joke Generator</title>
+	<link rel="stylesheet" href="{% static 'randomjoke/style.css' %}" />
+</head>
+<body>
+	<main class="page">
+		<header class="site-header">
+			<h1>Random Joke Generator</h1>
+			<p class="subtitle">Because everyone needs a laugh — hit refresh for more.</p>
+		</header>
+
+		<section class="joke-card">
+			<div class="joke-setup">{{ setup }}</div>
+			<div class="joke-punchline">{{ punchline }}</div>
+			<a class="btn" href="/">Get another joke</a>
+		</section>
+
+		<footer class="site-footer">Made with ☕ and a little API magic.</footer>
+	</main>
+</body>
+</html>

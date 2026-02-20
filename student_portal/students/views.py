@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Student
 from .forms import StudentForm
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,PasswordChangeForm
@@ -7,6 +7,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+
+from rest_framework.decorators import api_view
+from .serializers import StudentSerializer
 
 # Create your views here.
 # def home(request):
@@ -158,3 +161,9 @@ def change_password(request):
 #         return redirect('/students/')
 
 #     return render(request,'edit_student.html',{'student':student})
+
+@api_view(['GET'])
+def student_api(request):
+    students = Student.objects.all()
+    serializer = StudentSerializer(students, many=True)
+    return JsonResponse(serializer.data, safe=False)

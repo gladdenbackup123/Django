@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>XO — Tic Tac Toe vs Computer</title>
+    <link rel="stylesheet" href="{% static 'game/css/style.css' %}" />
+  </head>
+  <body>
+    <main class="stage">
+      <header class="header">
+        <div class="title">Tic <span>Tac</span> Toe</div>
+        <div class="subtitle">Play vs Computer — no login required</div>
+      </header>
+
+      <section class="board-wrap">
+        <div class="controls">
+          <div class="player-choose">
+            <label>You are</label>
+            <div class="switch">
+              <button id="chooseX" class="choice active">X</button>
+              <button id="chooseO" class="choice">O</button>
+            </div>
+          </div>
+
+          <div class="difficulty">
+            <label>Difficulty</label>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard (Unbeatable)</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button id="newGame" class="btn">New Game</button>
+            <button id="resetScore" class="btn ghost">Reset Score</button>
+          </div>
+        </div>
+
+        <div class="scoreboard">
+          <div class="score player-score">You: <span id="scoreYou">0</span></div>
+          <div class="score draws">Draws: <span id="scoreDraw">0</span></div>
+          <div class="score computer-score">Computer: <span id="scoreComp">0</span></div>
+        </div>
+
+        <div id="board" class="board" role="grid" aria-label="Tic Tac Toe board">
+          <!-- 9 cells inserted by JS -->
+        </div>
+
+        <div id="statusBar" class="status">Your move</div>
+      </section>
+
+      <footer class="footer">Made with ❤️ — play as X or O; try <strong>Hard</strong> for an unbeatable AI.</footer>
+    </main>
+
+    <template id="cellTemplate">
+      <button class="cell" data-index="__IDX__" aria-label="grid cell">
+        <span class="shape"></span>
+      </button>
+    </template>
+
+    <script src="{% static 'game/js/game.js' %}"></script>
+  </body>
+</html>

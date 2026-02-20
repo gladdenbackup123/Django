@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="weather-icon">🌤️</div>
+        <h1>Weather App</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <div style="width: 100%;">
+                <div class="input-group">
+                    <label for="city">Enter city name:</label>
+                    <input type="text" id="city" name="city" placeholder="e.g., London, New York, Tokyo" required>
+                </div>
+                <div class="button-group" style="margin-top: 12px;">
+                    <button type="submit">🔍 Get Weather</button>
+                </div>
+            </div>
+        </form>
+
+        {% if weather %}
+            <div class="success">Weather data loaded successfully!</div>
+            <div class="weather-card">
+                <h2>{{ weather.city }}</h2>
+                <div class="weather-info">
+                    <div class="weather-item">
+                        <label>🌡️ Temperature</label>
+                        <value>{{ weather.temperature }}°C</value>
+                    </div>
+                    <div class="weather-item">
+                        <label>💧 Humidity</label>
+                        <value>{{ weather.humidity }}%</value>
+                    </div>
+                    <div class="weather-item">
+                        <label>💨 Wind Speed</label>
+                        <value>{{ weather.wind_speed }} m/s</value>
+                    </div>
+                    <div class="weather-item">
+                        <label>📝 Description</label>
+                        <value>{{ weather.description|title }}</value>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <strong>⚠️ Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
